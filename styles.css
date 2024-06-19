@@ -117,7 +117,7 @@ body {
 }
 
 .delete.num {
-    flex: 2;
+    flex: 1.9;
     display: inline-block;
 }
 
@@ -130,7 +130,7 @@ body {
 .number-keys {
     padding: 5px;
 
-    height: 280px;
+    height: 285px;
     display: flex;
     align-items: stretch;
     flex: 1;
