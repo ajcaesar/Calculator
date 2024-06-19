@@ -56,13 +56,15 @@ class Calculator {
         this.previousNum = result;
         this.currNum = "0";
         this.currOperation = "";
+        if (!/\d/.test(result)) {
+            this.previousNum = "0";
+        }
         return result;
     }
 
     negate() {
         this.currNum = (parseFloat(this.currNum) * -1) + "";
     }
-
 
     operator(op) {
         if (this.currOperation == "") {
@@ -120,7 +122,14 @@ class Calculator {
     }
 
     sqrt() {
-
+        if(this.currOperation != "") {
+            this.calculate();
+            this.currNum = Math.sqrt(this.previousNum);
+        }
+        else {
+            this.previousNum = this.currNum;
+            this.currNum = Math.sqrt(this.previousNum);
+        }
     }
 }
 
@@ -135,7 +144,6 @@ function addDecimal() {
     console.log("hello");
     let num = calc.addDecimal();
     reorder();
-    console.log(calc.currNum);
 }
 
 function operate(event) {
@@ -145,9 +153,34 @@ function operate(event) {
     reorder(); 
 }
 
+function formatNumber(number) {
+    console.log('formatted');
+    // Convert number to string to check its length easily
+    let numStr = String(number);
+    let num = parseFloat(number);
+
+    // If the number is already within the limit, return it directly
+    if (numStr.length <= 10) return numStr;
+
+    // Check if the number is large or small and needs scientific notation
+    if (Math.abs(num) >= 1e+5 || Math.abs(num) <= 1e-4) {
+        // Convert to scientific notation with precision adjustment
+        i = 0 
+        while((""+ num.toExponential(i)).length < 10) {
+            i++;
+        }
+        return num.toExponential(i);  // Adjust '2' for desired precision
+    } else {
+        // For numbers that are within a "normal" range but too long
+        // Precision here is calculated to limit the string length to 10
+        let precision = 10 - Math.floor(Math.log10(Math.abs(num))) - 2;
+        return num.toFixed(Math.max(0, precision));
+    }
+}
+
 function reorder() {
-    mainText.textContent = "" + calc.currNum;
-    previousText.textContent = "" + calc.previousNum;
+    mainText.textContent = "" + formatNumber(calc.currNum);
+    previousText.textContent = "" + formatNumber(calc.previousNum);
 }
 
 function recolorNums() {
@@ -184,7 +217,13 @@ function equal() {
     }
 }
 
+function squareRoot() {
+    calc.sqrt();
+    reorder();
+    recolorNums();
+}
 
+sqrt.addEventListener("click", squareRoot);
 equals.addEventListener("click", equal);
 negative.addEventListener("click", negate);
 clear.addEventListener("click", clearIt);
@@ -216,7 +255,7 @@ function adjustFontSize() {
     const previousNum = document.querySelector('.previous-num');
     const currNum = document.querySelector(".current-num")
     previousNum.style.fontSize = `${fontSize}px`; // apply the calculated font size
-    currNum.style.fontSize = `${2*fontSize}px`
+    currNum.style.fontSize = `${1.8*fontSize}px`
 }
 
 window.addEventListener('resize', adjustFontSize); // adjust font size on window resize
