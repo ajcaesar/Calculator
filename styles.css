@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 
 body {
     display: flex;
@@ -19,16 +23,16 @@ body {
 }
 
 .top-section {
-    height: 100px;
+    height: 120px;
     padding: 0px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 5px;
 }
 
 .solar-logo-container {
     height: 50px;
-    padding: 3px;
     padding-bottom: 3px;
-    padding-left: 7px;
-    padding-right: 7px;
     display: flex;
     align-items: stretch;
 }
@@ -64,10 +68,35 @@ body {
 
 .number-display {
     box-sizing: border-box;
-    background-color: #B2B2B2;
+    background-color: #E4EBD9;
     height: 100%;
     width: 100%;
+    margin-top: 5px;
+    border-radius: 5px;
+    padding: 5px;
 }
+
+.previous-num {
+    text-align: right;
+    height: 30px;
+    width: 100%;
+    margin-bottom: 5px;
+    border: 2px solid blue;
+    font-size: 25px;
+    font-family: sans-serif;
+}
+
+.current-num {
+    text-align: right;
+    height: 70px;
+    width: 100%;
+    border: 2px solid red;
+    box-sizing: border-box;
+    font-size: 65px;
+    font-family: sans-serif;
+}
+
+
 
 
 
