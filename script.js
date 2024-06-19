@@ -1,5 +1,3 @@
-import {Stack, Queue} from functions.js
-
 const mainText = document.querySelector("div.current-num");
 const previousText = document.querySelector("div.previous-num");
 const one = document.getElementById("one");
@@ -22,14 +20,13 @@ const subtract = document.getElementById("subtraction");
 const equals = document.getElementById("equals");
 
 const operators = [modulus, multiply, add, divide, subtract];
-one.style.backgroundColor = "red";
-mainText.textContent = "ehello world";
+mainText.textContent = "0";
 
 class Calculator {
     constructor() {
-        previousNum = "";
-        let currNum = "0";
-        let currOperation = "";
+        this.previousNum = "";
+        this.currNum = "0";
+        this.currOperation = "";
     }
 
     #applyOperation(a, operator, b=0) {
@@ -50,50 +47,48 @@ class Calculator {
     }
 
     calculate() {
-        num1 = parseFloat(previousNum);
-        num2 = parseFloat(currNum);
-        result = applyOperation(num1, currOperation, num2);
-        previousNum = result;
-        currOperation = "";
+        let num1 = parseFloat(previousNum);
+        let num2 = parseFloat(currNum);
+        let result = applyOperation(num1, currOperation, num2);
+        this.previousNum = result;
+        this.currOperation = "";
         return result;
     }
 
 
     operator(op) {
-        if (currOperation == "") {
-            currOperation = op;
-            previousText.textContent = currNum;
-            previousNum = currNum;
-            currNum = "0";
-            mainText.textContent = currNum;
+        if (this.currOperation == "") {
+            this.currOperation = op;
+            this.previousNum = this.currNum;
+            this.currNum = "0";
         }
         else {
             calculate();
-            currOperation = op;
+            this.currOperation = op;
         }
     }
 
     addNum(num) {
-        currNum += num;
-        return currNum;
+        this.currNum += num;
+        return this.currNum;
     }
 
     addDecimal(event) {
-        currNum += ".";
-        return currNum;
+        this.currNum += ".";
+        return this.currNum;
     }
-
 }
 
 calc = new Calculator();
 
 function addNum(event) {
-    num = calc.addNum(event.target.textContent);
-    mainText.textContent = num;
+    let num = calc.addNum(event.target.textContent);
+    reorder();
+    console.log("cliicked");
 }
 
 function addDecimal() {
-    num = calc.addDecimal();
+    let num = calc.addDecimal();
     mainText.textContent = num;
 }
 
@@ -104,19 +99,19 @@ function operate(event) {
     reorder(); 
 }
 
-
 function reorder() {
-    mainText = calc.currNum;
-    previousText = calc.previousNum;
+    mainText.textContent = "" + calc.currNum.includes(".") ? parseFloat(calc.currNum): parseInt(calc.currNum, 10);
+    previousText.textContent = "" + isNaN(calc.previousNum) ? "" : calc.previousNum.includes(".") ? parseFloat(calc.previousNum): parseInt(calc.previousNum, 10);
 }
 
 function recolorNums() {
-    for (item in operators){
+    for (let item of operators){
+        console.log(item);
         item.style.backgroundColor = "#EFEFEF";
     }
 }
 
-zero.addEventListener("click", addNum);
+zero.addEventListener('click', addNum);
 one.addEventListener("click", addNum);
 two.addEventListener("click", addNum);
 three.addEventListener("click", addNum);
@@ -127,7 +122,12 @@ seven.addEventListener("click", addNum);
 eight.addEventListener("click", addNum);
 nine.addEventListener("click", addNum);
 
-// multiply.addEventListener("click", )
+multiply.addEventListener("click", operate);
+divide.addEventListener("click", operate);
+subtract.addEventListener("click", operate);
+modulus.addEventListener("click", operate);
+
+
 
 
 
