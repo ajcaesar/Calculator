@@ -18,6 +18,7 @@ const sqrt = document.getElementById("sqrt");
 const divide = document.getElementById("division");
 const subtract = document.getElementById("subtraction");
 const equals = document.getElementById("equals");
+const decimal = document.getElementById("dot");
 
 const operators = [modulus, multiply, add, divide, subtract];
 mainText.textContent = "0";
@@ -69,7 +70,12 @@ class Calculator {
     }
 
     addNum(num) {
+        if((this.currNum) == "0") {
+            this.currNum = num;
+        }
+        else {
         this.currNum += num;
+    }
         return this.currNum;
     }
 
@@ -84,12 +90,13 @@ calc = new Calculator();
 function addNum(event) {
     let num = calc.addNum(event.target.textContent);
     reorder();
-    console.log("cliicked");
 }
 
 function addDecimal() {
+    console.log("hello");
     let num = calc.addDecimal();
-    mainText.textContent = num;
+    reorder();
+    console.log(calc.currNum);
 }
 
 function operate(event) {
@@ -100,8 +107,8 @@ function operate(event) {
 }
 
 function reorder() {
-    mainText.textContent = "" + calc.currNum.includes(".") ? parseFloat(calc.currNum): parseInt(calc.currNum, 10);
-    previousText.textContent = "" + isNaN(calc.previousNum) ? "" : calc.previousNum.includes(".") ? parseFloat(calc.previousNum): parseInt(calc.previousNum, 10);
+    mainText.textContent = "" + calc.currNum;
+    previousText.textContent = "" + isNaN(calc.previousNum) ? "" : calc.previousNum;
 }
 
 function recolorNums() {
@@ -126,8 +133,20 @@ multiply.addEventListener("click", operate);
 divide.addEventListener("click", operate);
 subtract.addEventListener("click", operate);
 modulus.addEventListener("click", operate);
+decimal.addEventListener("click", addDecimal);
 
 
+function adjustFontSize() {
+    console.log("resize");
+    const numberDisplay = document.querySelector('.number-display');
+    const width = numberDisplay.offsetWidth; // get the width of .number-display
+    const fontSize = width * 0.1; // example: set font size to be 10% of parent width
+    const previousNum = document.querySelector('.previous-num');
+    const currNum = document.querySelector(".current-num")
+    previousNum.style.fontSize = `${fontSize}px`; // apply the calculated font size
+    currNum.style.fontSize = `${2*fontSize}px`
+}
 
-
+window.addEventListener('resize', adjustFontSize); // adjust font size on window resize
+adjustFontSize(); 
 
