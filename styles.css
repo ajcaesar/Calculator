@@ -130,12 +130,12 @@ body {
 
 .number-keys {
     padding: 5px;
-
     height: 285px;
     display: flex;
     align-items: stretch;
     flex: 1;
     gap: 5px;
+    background-color: #EFEFEF;
 }
 
 .num-column {
