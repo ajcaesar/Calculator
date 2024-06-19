@@ -19,6 +19,8 @@ const divide = document.getElementById("division");
 const subtract = document.getElementById("subtraction");
 const equals = document.getElementById("equals");
 const decimal = document.getElementById("dot");
+const clear = document.querySelector(".clear.num");
+const del = document.querySelector(".delete.num");
 
 const operators = [modulus, multiply, add, divide, subtract];
 mainText.textContent = "0";
@@ -48,12 +50,17 @@ class Calculator {
     }
 
     calculate() {
-        let num1 = parseFloat(previousNum);
-        let num2 = parseFloat(currNum);
-        let result = applyOperation(num1, currOperation, num2);
+        let num1 = parseFloat(this.previousNum);
+        let num2 = parseFloat(this.currNum);
+        let result = this.#applyOperation(num1, this.currOperation, num2);
         this.previousNum = result;
+        this.currNum = "0";
         this.currOperation = "";
         return result;
+    }
+
+    negate() {
+        this.currNum = (parseFloat(this.currNum) * -1) + "";
     }
 
 
@@ -64,7 +71,7 @@ class Calculator {
             this.currNum = "0";
         }
         else {
-            calculate();
+            this.calculate();
             this.currOperation = op;
         }
     }
@@ -82,6 +89,38 @@ class Calculator {
     addDecimal(event) {
         this.currNum += ".";
         return this.currNum;
+    }
+
+    clear() {
+        this.currNum = "0";
+        this.previousNum = "";
+        this.currOperation = "";
+    }
+
+    delete() {
+        if(this.currNum == "0") {
+            return;
+        }
+        else if (this.currNum.length == 1) {
+            this.currNum = "0";
+            return;
+        }
+        this.currNum = this.currNum.substring(0, this.currNum.length - 1);
+        return;
+    }
+
+    equal() {
+        if(this.currOperation.length > 0) {
+            this.calculate();
+            this.currNum = this.previousNum;
+            this.previousNum = "";
+            return true;
+        }
+        return false;
+    }
+
+    sqrt() {
+
     }
 }
 
@@ -108,7 +147,7 @@ function operate(event) {
 
 function reorder() {
     mainText.textContent = "" + calc.currNum;
-    previousText.textContent = "" + isNaN(calc.previousNum) ? "" : calc.previousNum;
+    previousText.textContent = "" + calc.previousNum;
 }
 
 function recolorNums() {
@@ -118,6 +157,38 @@ function recolorNums() {
     }
 }
 
+function clearIt() {
+    calc.clear();
+    recolorNums();
+    reorder();
+}
+
+function delIt() {
+    calc.delete();
+    reorder();
+}
+
+function negate() {
+    calc.negate();
+    reorder();
+}
+
+function equal() {
+    let x = calc.equal();
+    if(x) {
+        recolorNums();
+        reorder();
+    }
+    else {
+        return;
+    }
+}
+
+
+equals.addEventListener("click", equal);
+negative.addEventListener("click", negate);
+clear.addEventListener("click", clearIt);
+del.addEventListener("click", delIt);
 zero.addEventListener('click', addNum);
 one.addEventListener("click", addNum);
 two.addEventListener("click", addNum);
@@ -129,6 +200,7 @@ seven.addEventListener("click", addNum);
 eight.addEventListener("click", addNum);
 nine.addEventListener("click", addNum);
 
+add.addEventListener("click", operate);
 multiply.addEventListener("click", operate);
 divide.addEventListener("click", operate);
 subtract.addEventListener("click", operate);
