@@ -1,0 +1,4 @@
+same as the photo but get rid of the top row, 
+move the numbers down and the period and +/- up 
+so it makes a line with the clear button
+
