@@ -11,7 +11,7 @@ const six = document.getElementById("six");
 const seven = document.getElementById("seven");
 const eight = document.getElementById("eight");
 const nine = document.getElementById("nine");
-const zero = documemnt.getElementById("zero");
+const zero = document.getElementById("zero");
 const negative = document.getElementById("negative");
 const modulus = document.getElementById('modulus');
 const multiply = document.getElementById("multiplication");
@@ -22,6 +22,8 @@ const subtract = document.getElementById("subtraction");
 const equals = document.getElementById("equals");
 
 const operators = [modulus, multiply, add, divide, subtract];
+one.style.backgroundColor = "red";
+mainText.textContent = "ehello world";
 
 class Calculator {
     constructor() {
