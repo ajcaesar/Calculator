@@ -1,3 +1,17 @@
+function adjustFontSize() {
+    console.log("resize");
+    const numberDisplay = document.querySelector('.number-display');
+    const width = numberDisplay.offsetWidth; // get the width of .number-display
+    const fontSize = width * 0.1; // example: set font size to be 10% of parent width
+    const previousNum = document.querySelector('.previous-num');
+    const currNum = document.querySelector(".current-num")
+    previousNum.style.fontSize = `${fontSize}px`; // apply the calculated font size
+    currNum.style.fontSize = `${1.75*fontSize}px`;
+}
+
+window.addEventListener('resize', adjustFontSize); // adjust font size on window resize
+window.onload = adjustFontSize(); 
+
 const mainText = document.querySelector("div.current-num");
 const previousText = document.querySelector("div.previous-num");
 const one = document.getElementById("one");
@@ -246,18 +260,4 @@ subtract.addEventListener("click", operate);
 modulus.addEventListener("click", operate);
 decimal.addEventListener("click", addDecimal);
 
-
-function adjustFontSize() {
-    console.log("resize");
-    const numberDisplay = document.querySelector('.number-display');
-    const width = numberDisplay.offsetWidth; // get the width of .number-display
-    const fontSize = width * 0.1; // example: set font size to be 10% of parent width
-    const previousNum = document.querySelector('.previous-num');
-    const currNum = document.querySelector(".current-num")
-    previousNum.style.fontSize = `${fontSize}px`; // apply the calculated font size
-    currNum.style.fontSize = `${1.75*fontSize}px`;
-}
-
-window.addEventListener('resize', adjustFontSize); // adjust font size on window resize
-adjustFontSize(); 
 
