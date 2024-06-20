@@ -240,6 +240,7 @@ function equal() {
     if(x) {
         recolorNums();
         reorder();
+        calc.currNum = "0";
     }
     else {
         return;
