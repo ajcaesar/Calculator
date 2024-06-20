@@ -209,7 +209,14 @@ function recolorNums() {
     for (let item of operators){
         console.log(item);
         item.style.backgroundColor = "#EFEFEF";
+        item.onmouseover = function() {
+            item.style.backgroundColor = "#A3CBF9";
+        };
+        item.onmouseleave = function() {
+            item.style.backgroundColor = "#EFEFEF";
+        }
     }
+
 }
 
 function clearIt() {
