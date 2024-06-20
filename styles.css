@@ -1,6 +1,6 @@
 * {
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 
@@ -88,7 +88,6 @@ body {
     height: 65px;
     width: 100%;
     font-size: 35px;
-    font-family: sans-serif;
     flex: 2;
     padding: 0px;
 }
