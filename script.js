@@ -221,16 +221,14 @@ function recolorNums(tgt = null) {
     if(tgt != null) {
         tgt.style.backgroundColor = "#3D92F4";
         tgt.onmouseover = function() {
-            item.style.backgroundColor = "#3D92F4";
+            tgt.style.backgroundColor = "#3D92F4";
         };
         tgt.onmouseleave = function() {
-            item.style.backgroundColor = "#3D92F4";
+            tgt.style.backgroundColor = "#3D92F4";
         }
     }
-
-
 }
-
+// this function clears all memory
 function clearIt() {
     calc.clear();
     recolorNums();
