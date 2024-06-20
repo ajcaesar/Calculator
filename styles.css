@@ -155,7 +155,6 @@ body {
     align-items: stretch;
     flex: 1;
     gap: 5px;
-    background-color: #A8A8A8;
 }
 
 .num-column {
