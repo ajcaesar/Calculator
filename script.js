@@ -255,7 +255,7 @@ function adjustFontSize() {
     const previousNum = document.querySelector('.previous-num');
     const currNum = document.querySelector(".current-num")
     previousNum.style.fontSize = `${fontSize}px`; // apply the calculated font size
-    currNum.style.fontSize = `${1.75*fontSize}px`
+    currNum.style.fontSize = `${1.75*fontSize}px`;
 }
 
 window.addEventListener('resize', adjustFontSize); // adjust font size on window resize
