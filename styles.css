@@ -130,9 +130,17 @@ body {
     border-radius: 5px;
 }
 
+.clear.num:hover {
+    background-color: red;
+}
+
 .delete.num {
     flex: 1.9;
     display: inline-block;
+}
+
+.delete.num:hover {
+    background-color: #A3CBF9;
 }
 
 .num {
@@ -162,6 +170,10 @@ body {
 .num {
     flex: 1;
     background-color: #EFEFEF;
+}
+
+.num:hover {
+    background-color: #A3CBF9;
 }
 
 #addition {
