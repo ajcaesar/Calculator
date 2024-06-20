@@ -182,6 +182,10 @@ body {
     flex: 2.35;
 }
 
+.operator-active {
+    background-color: #3D92F4; /* Dark blue */
+}
+
 
 
 

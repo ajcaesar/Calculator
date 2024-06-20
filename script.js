@@ -173,8 +173,7 @@ function addDecimal() {
 }
 
 function operate(event) {
-    recolorNums();
-    event.target.style.backgroundColor = "#3D92F4";
+    recolorNums(event.target);
     calc.operator(event.target.textContent);
     reorder(); 
 }
@@ -209,9 +208,8 @@ function reorder() {
     previousText.textContent = "" + formatNumber(calc.previousNum);
 }
 
-function recolorNums() {
+function recolorNums(tgt = null) {
     for (let item of operators){
-        console.log(item);
         item.style.backgroundColor = "#EFEFEF";
         item.onmouseover = function() {
             item.style.backgroundColor = "#A3CBF9";
@@ -220,6 +218,16 @@ function recolorNums() {
             item.style.backgroundColor = "#EFEFEF";
         }
     }
+    if(tgt != null) {
+        tgt.style.backgroundColor = "#3D92F4";
+        tgt.onmouseover = function() {
+            item.style.backgroundColor = "#3D92F4";
+        };
+        tgt.onmouseleave = function() {
+            item.style.backgroundColor = "#3D92F4";
+        }
+    }
+
 
 }
 
