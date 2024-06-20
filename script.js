@@ -1,5 +1,4 @@
 function adjustFontSize() {
-    console.log("resize");
     const numberDisplay = document.querySelector('.number-display');
     const width = numberDisplay.offsetWidth; // get the width of .number-display
     const fontSize = width * 0.1; // example: set font size to be 10% of parent width
@@ -71,7 +70,6 @@ class Calculator {
         this.currNum = "0";
         this.currOperation = "";
         if (!/\d/.test(result)) {
-            console.log(result);
             this.previousNum = "0";
         }
         return result;
@@ -167,9 +165,10 @@ function addNum(event) {
 }
 
 function addDecimal() {
-    console.log("hello");
+    if (!calc.currNum.includes(".")) {
     let num = calc.addDecimal();
     reorder();
+}
 }
 
 function operate(event) {
@@ -179,7 +178,6 @@ function operate(event) {
 }
 
 function formatNumber(number) {
-    console.log('formatted');
     // Convert number to string to check its length easily
     let numStr = String(number);
     let num = parseFloat(number);
