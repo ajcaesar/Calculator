@@ -138,12 +138,20 @@ class Calculator {
     sqrt() {
         if(this.currOperation != "") {
             this.calculate();
+            if (this.previousNum < 0) {
+                this.currNum = "0";
+            }
             this.currNum = Math.sqrt(this.previousNum);
         }
         else {
             this.previousNum = this.currNum;
+            if (this.previousNum < 0) {
+                this.currNum = "0";
+            }
+            else{
             this.currNum = Math.sqrt(this.previousNum);
         }
+    }
     }
 }
 
