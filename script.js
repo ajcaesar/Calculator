@@ -71,6 +71,7 @@ class Calculator {
         this.currNum = "0";
         this.currOperation = "";
         if (!/\d/.test(result)) {
+            console.log(result);
             this.previousNum = "0";
         }
         return result;
@@ -129,7 +130,7 @@ class Calculator {
         if(this.currOperation.length > 0) {
             this.calculate();
             this.currNum = this.previousNum;
-            this.previousNum = "";
+            // this.previousNum = "";
             return true;
         }
         return false;
@@ -158,6 +159,9 @@ class Calculator {
 calc = new Calculator();
 
 function addNum(event) {
+    if (calc.previousNum ==" ") {
+        clearIt();
+    }
     let num = calc.addNum(event.target.textContent);
     reorder();
 }
@@ -238,9 +242,9 @@ function negate() {
 function equal() {
     let x = calc.equal();
     if(x) {
+        calc.previousNum = " ";
         recolorNums();
         reorder();
-        calc.currNum = "0";
     }
     else {
         return;
