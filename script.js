@@ -7,9 +7,7 @@ function adjustFontSize() {
     previousNum.style.fontSize = `${fontSize}px`; // apply the calculated font size
     currNum.style.fontSize = `${1.75*fontSize}px`;
 }
-
-window.addEventListener('resize', adjustFontSize); // adjust font size on window resize
-window.onload = adjustFontSize(); 
+    
 
 const mainText = document.querySelector("div.current-num");
 const previousText = document.querySelector("div.previous-num");
@@ -39,10 +37,10 @@ const operators = [modulus, multiply, add, divide, subtract];
 mainText.textContent = "0";
 
 class Calculator {
-    constructor() {
-        this.previousNum = "";
-        this.currNum = "0";
-        this.currOperation = "";
+    constructor(previousNum = "", currNum = "0", currOperation="") {
+        this.previousNum = previousNum;
+        this.currNum = currNum;
+        this.currOperation = currOperation;
     }
 
     #applyOperation(a, operator, b=0) {
@@ -154,8 +152,6 @@ class Calculator {
     }
 }
 
-calc = new Calculator();
-
 function addNum(event) {
     if (calc.previousNum ==" ") {
         clearIt();
@@ -216,7 +212,7 @@ function recolorNums(tgt = null) {
             item.style.backgroundColor = "#EFEFEF";
         }
     }
-    if(tgt != null) {
+    if(tgt) {
         tgt.style.backgroundColor = "#3D92F4";
         tgt.onmouseover = function() {
             tgt.style.backgroundColor = "#3D92F4";
@@ -284,4 +280,40 @@ subtract.addEventListener("click", operate);
 modulus.addEventListener("click", operate);
 decimal.addEventListener("click", addDecimal);
 
+window.addEventListener('resize', adjustFontSize); // adjust font size on window resize
+
+const ops = {
+    "+": add,
+    "-": subtract,
+    "x": multiply,
+    "%": modulus,
+    "÷": divide,
+    "": null
+}
+
+let calc;
+window.onload = () => {
+    let previousNum = localStorage.getItem("previousNum");
+    let currNum = localStorage.getItem("currNum");
+    let currOperation = localStorage.getItem("currOperation");
+    if (!previousNum) {
+        previousNum = "";
+    }
+    if (!currNum) {
+        currNum = "0";
+    }
+    if (!currOperation) {
+        currOperation = "";
+    }
+    calc = new Calculator(previousNum, currNum, currOperation);
+    reorder();
+    recolorNums(ops[currOperation]);
+};
+
+window.onbeforeunload = () => {
+    localStorage.clear();
+    localStorage.setItem("previousNum", calc.previousNum);
+    localStorage.setItem("currNum", calc.currNum);
+    localStorage.setItem("currOperation", calc.currOperation);
+}
 
