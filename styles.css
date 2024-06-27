@@ -4,7 +4,7 @@
 }
 
 :root {
-    --main-width: max(30vw, 400px);
+    --main-width: min(max(50vw, 400px), 600px);
 }
 
 body {
