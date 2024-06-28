@@ -306,6 +306,7 @@ window.onload = () => {
         currOperation = "";
     }
     calc = new Calculator(previousNum, currNum, currOperation);
+    adjustFontSize();
     reorder();
     recolorNums(ops[currOperation]);
 };
